@@ -1,0 +1,94 @@
+{ config, pkgs, ... }:
+
+let
+  gruvboxRainbow = pkgs.fetchurl {
+    url = "https://starship.rs/presets/toml/gruvbox-rainbow.toml";
+    sha256 = "0sjw2xzhxqamidfcn6d369skw2rfmyx3a45wz7ww3x7d6d25c1q3"; # Placeholder
+  };
+in
+
+{
+  imports = [
+    ./gui
+    ./terminal
+  ];
+
+  home.username = "rudi";
+  home.homeDirectory = "/home/rudi";
+
+
+  # Packages that should be installed to the user profile.
+  home.packages = with pkgs; [
+
+
+    # shell customization
+    alacritty
+    starship
+
+
+    # Networking & Proxy Tools
+    tor
+    proxychains-ng
+    nmap
+    netcat
+    curl
+    wget
+    whois
+    dig
+    tcpdump
+
+    # OSINT Tools
+    theharvester
+    holehe # check emails across various sites
+    ghunt # check for gmail account
+    recon-ng
+    sherlock
+    metasploit
+    subfinder
+    
+    # web scraping & automation
+    python3
+    python3Packages.requests
+    python3Packages.beautifulsoup4
+    python3Packages.selenium
+    chromedriver
+
+    # Other tools
+    btop  # replacement of htop/nmon
+    iotop # io monitoring
+    iftop # network monitoring
+  ];
+
+  programs.vim = {
+    enable = true;
+    extraConfig = ''
+      set tabstop=2        " Display tabs as 2 spaces
+      set shiftwidth=2     " Indentation level
+      set softtabstop=2    " Insert 2 spaces when pressing Tab
+      set expandtab        " Convert tabs to spaces
+    '';
+  };
+
+  
+  programs.starship = {
+    enable = true;
+    settings = builtins.fromTOML (builtins.readFile gruvboxRainbow);
+  };
+
+
+  # basic configuration of git, please change to your own
+  programs.git = {
+    enable = true;
+    userName = "rudi.research";
+    userEmail = "rudi.research@proton.me";
+    extraConfig = {
+      init.defaultBranch = "main";
+    };
+  };
+
+
+  # You can update home Manager without changing this value. See
+  # the home Manager release notes for a list of state version
+  # changes in each release.
+  home.stateVersion = "25.05";
+}
