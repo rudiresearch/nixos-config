@@ -12,6 +12,7 @@ in
     ./gui
     ./terminal
     ./i3.nix
+    ./rofi.nix
   ];
 
   home.username = "rudi";
@@ -25,7 +26,6 @@ in
 
     # shell customization
     starship
-
 
     # Networking & Proxy Tools
     tor
@@ -88,6 +88,7 @@ in
 
   stylix.targets.starship.enable = false;
   stylix.targets.alacritty.enable = true;
+  stylix.targets.xfce.enable = true;
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
