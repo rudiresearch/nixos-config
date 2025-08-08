@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, callPackage, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -43,20 +43,27 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Enable the Wayland and KDE Plasma 6.
-   services = {
-     desktopManager.plasma6.enable = true;
-     displayManager.sddm.enable = true;
-     displayManager.sddm.wayland.enable = true;
-   };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-    # https://gist.github.com/jatcwang/ae3b7019f219b8cdc6798329108c9aee
-    options = "caps:escape";
+  # Enable the xfce and i3 
+  services.xserver = {
+    enable = true;   
+    desktopManager = {
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
+    };
+    xkb = {
+      layout = "us";
+      variant = "";
+      # https://gist.github.com/jatcwang/ae3b7019f219b8cdc6798329108c9aee
+      options = "caps:escape";
+    };
+    windowManager.i3.enable = true;
   };
+
+  services.displayManager.defaultSession = "xfce+i3";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -143,6 +150,9 @@
   # include flakes
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
+  # load xfce4-panel config
+  environment.etc."xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml".source =
+    ./assets/xfce4-panel.xml;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -11,6 +11,7 @@ in
   imports = [
     ./gui
     ./terminal
+    ./i3.nix
   ];
 
   home.username = "rudi";
@@ -20,9 +21,9 @@ in
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     chromium
+    xfce.xfce4-panel
 
     # shell customization
-    alacritty
     starship
 
 
@@ -73,6 +74,16 @@ in
   programs.starship = {
     enable = true;
     settings = builtins.fromTOML (builtins.readFile gruvboxRainbow);
+  };
+
+
+  services.flameshot = {
+    enable = true;
+    settings = {
+      General = {
+        showStartupLaunchMessage = true;
+      };
+    };
   };
 
   stylix.targets.starship.enable = false;

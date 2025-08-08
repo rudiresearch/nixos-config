@@ -14,8 +14,8 @@
       name = "Ubuntu";
     };
     monospace = {
-      package = pkgs.jetbrains-mono;
-      name = "JetBrains Mono";
+      package = pkgs.nerd-fonts.hack;
+      name = "Hack Nerd Font Mono";
     };
     emoji = {
       package = pkgs.noto-fonts-emoji;
