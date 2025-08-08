@@ -72,10 +72,11 @@ in
   
   programs.starship = {
     enable = true;
-#    settings = builtins.fromTOML (builtins.readFile gruvboxRainbow);
+    settings = builtins.fromTOML (builtins.readFile gruvboxRainbow);
   };
 
-
+  stylix.targets.starship.enable = false;
+  stylix.targets.alacritty.enable = true;
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
