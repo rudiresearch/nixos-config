@@ -19,7 +19,7 @@ in
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-
+    chromium
 
     # shell customization
     alacritty
@@ -72,7 +72,7 @@ in
   
   programs.starship = {
     enable = true;
-    settings = builtins.fromTOML (builtins.readFile gruvboxRainbow);
+#    settings = builtins.fromTOML (builtins.readFile gruvboxRainbow);
   };
 
 
@@ -85,8 +85,7 @@ in
       init.defaultBranch = "main";
     };
   };
-
-
+  
   # You can update home Manager without changing this value. See
   # the home Manager release notes for a list of state version
   # changes in each release.

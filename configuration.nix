@@ -7,6 +7,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./stylix.nix
     ];
 
   # Bootloader.
@@ -93,14 +94,55 @@
     nerd-fonts.hack
   ];
 
-  programs.zsh.enable = true;
-  programs.firefox.enable = true;
+
+  programs = {
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+
+      interactiveShellInit = ''
+        source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+      '';
+      
+      shellAliases = {
+        ll = "ls -l"; 
+      };
+
+    };
+
+    chromium = {
+      enable = true; 
+      extensions = [
+        "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+        # "edibdbjcniadpccecjdfdjjppcpchdlm" # I still don't care about cookies
+        "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+        "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+        "jinjaccalgkegednnccohejagnlnfdag" # Violentmonkey
+        # "dpplabbmogkhghncfbfdeeokoefdjegm" # Proxy SwitchySharp
+        # "mooikfkahbdckldjjndioackbalphokd" # Selenium IDE
+        # "hnkcfpcejkafcihlgbojoidoihckciin" # Referer Control
+      ];
+    };
+
+    firefox.enable = true;
+
+    vim = {
+      defaultEditor = true;
+      enable = true;
+    };
+  };
+
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # include flakes
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

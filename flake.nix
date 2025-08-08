@@ -8,16 +8,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager/release-25.05";
     };
-    treefmt-nix = {
+    stylix = {
+      url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:numtide/treefmt-nix";
     };
-
-
 
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-parts, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, flake-parts, home-manager, stylix, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -36,6 +34,7 @@
         };
         modules = [
           ./configuration.nix
+          stylix.nixosModules.stylix
 
           # basic system settings
           ({ pkgs, ... }: {
@@ -49,6 +48,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.users.rudi = import ./homes/rudi/rudi.nix;
           }
         ];
