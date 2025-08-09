@@ -19,6 +19,7 @@
           "${modifier}+Return" = "exec ${cfg.config.terminal}";
           "${modifier}+q" = "kill";
           "${modifier}+space" = "exec rofi -show combi -display-drun ''";
+          "${modifier}+Shift+space" = "exec xfce4-popup-applicationsmenu";
 
           "${modifier}+Left" = "focus left";
           "${modifier}+Down" = "focus down";
@@ -81,8 +82,10 @@
 
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+r" = "restart";
+          "${modifier}+Mod1+l" = "exec xflock4";
+          "${modifier}+Shift+Escape" = "exec xfce4-taskmanager";
           "${modifier}+Shift+e" =
-            "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
+            "exec xfce4-session-logout";
 
           "${modifier}+r" = "mode resize";
 
@@ -90,9 +93,9 @@
           "${modifier}+a" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         };
 
-      startup = [
-        { command = "xfce4-panel"; always = true; notification = false; }
-      ];
+#      startup = [
+#        { command = "xfce4-panel"; always = true; notification = false; }
+#      ];
 
       terminal = "alacritty";
       workspaceAutoBackAndForth = true;

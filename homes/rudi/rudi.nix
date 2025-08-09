@@ -18,6 +18,7 @@ in
   home.username = "rudi";
   home.homeDirectory = "/home/rudi";
 
+  home.file.".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml".source = ./assets/xfce4-keyboard-shortcuts.xml;
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
