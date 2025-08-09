@@ -23,13 +23,13 @@ in
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    xfce.xfce4-panel
+    #    xfce.xfce4-panel
 
     # shell customization
     starship
 
     # Networking & Proxy Tools
-    tor
+    tor-browser-bundle-bin
     proxychains-ng
     nmap
     netcat
@@ -48,7 +48,7 @@ in
     sherlock
     subfinder
     theharvester
-    
+
     # web scraping & automation
     python3
     python3Packages.requests
@@ -56,7 +56,7 @@ in
     python3Packages.selenium
 
     # Other tools
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
   ];
@@ -94,6 +94,7 @@ in
   stylix.targets.starship.enable = false;
   stylix.targets.alacritty.enable = true;
   stylix.targets.xfce.enable = true;
+
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;

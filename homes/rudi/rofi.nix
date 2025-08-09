@@ -17,7 +17,7 @@ in
       combi-modi = "drun,calc,emoji";
       modi = "drun,calc,emoji,combi";
       show-icons = true;
-      terminal = "alacritty"; 
+      terminal = "alacritty";
       kb-row-up = "Up,Control+k,Shift+Tab";
       kb-row-down = "Down,Control+j";
       kb-accept-entry = "Control+m,Return";

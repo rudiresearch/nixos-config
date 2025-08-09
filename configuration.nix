@@ -1,11 +1,9 @@
-
-{ config, pkgs, lib, callPackage, ... }:
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./stylix.nix
-    ];
+{ config, pkgs, lib, callPackage, ... }: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./stylix.nix
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -36,7 +34,7 @@
 
   # Enable the xfce and i3 
   services.xserver = {
-    enable = true;   
+    enable = true;
     desktopManager = {
       xterm.enable = false;
       xfce = {
@@ -58,7 +56,9 @@
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -73,13 +73,8 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
   };
-  
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.fira-code
-    nerd-fonts.hack
-  ];
-
+  fonts.packages = with pkgs; [ nerd-fonts.fira-code nerd-fonts.hack ];
 
   programs = {
     zsh = {
@@ -91,10 +86,8 @@
       interactiveShellInit = ''
         source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       '';
-      
-      shellAliases = {
-        ll = "ls -l"; 
-      };
+
+      shellAliases = { ll = "ls -l"; };
 
     };
 
@@ -104,23 +97,29 @@
         # privacy
         "edibdbjcniadpccecjdfdjjppcpchdlm" # I still don't care about cookies
         "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+        "pkehgijcmpdhfbdbbnkijodmdjhbjlgp" # Privacy Badger
+        "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin Lite
 
+        "cofdbpoegempjloogbagkncekinflcnj" # DeepL: translate and write with AI
         "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
         "jinjaccalgkegednnccohejagnlnfdag" # Violentmonkey
 
         # OSINT-related extensions
+        "ofaokhiedipichpaobibbnahnkdoiiah" # Instant Data Scraper
+        "lhgkegeccnckoiliokondpaaalbhafoa" # IP Address and Domain Information
         "mmbhfeiddhndihdjeganjggkmjapkffm" # EXIF Viewer Pro
+        "manapjdamopgbpimgojkccikaabhmocd" # Sputnik
         "haebnnbpedcbhciplfhjjkbafijpncjl" # TinEye Reverse Image Search
         "bhchdcejhohfmigjafbampogmaanbfkg" # User-Agent Switcher and Manager
         "mnakbpdnkedaegeiaoakkjafhoidklnf" # Vortimo
+        "fpnmgdkabkmnadcjpehmlllkndpkmiak" # Wayback Machine
 
       ];
       initialPrefs = {
         "distribution" = {
           "import_bookmarks" = false;
-          "import_bookmarks_from_file" = ./assets/bookmarks.html; 
-        }; 
+          "import_bookmarks_from_file" = ./assets/bookmarks.html;
+        };
       };
       extraOpts = {
         "ShowHomeButton" = false;
@@ -136,7 +135,6 @@
     };
   };
 
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -145,22 +143,22 @@
 
   # This snippet writes a policy file to configure search engines
   environment.etc."opt/chrome/policies/managed/search_engines.json".text = ''
-  {
-    "SearchProviderOverrides": [
-      {
-        "Name": "DuckDuckGo",
-        "Keyword": "ddg",
-        "SearchURL": "https://duckduckgo.com/?q={searchTerms}",
-        "IconURL": "https://duckduckgo.com/favicon.ico"
-      },
-      {
-        "Name": "ExampleSearch",
-        "Keyword": "ex",
-        "SearchURL": "https://example.com/search?q={searchTerms}",
-        "IconURL": "https://example.com/favicon.ico"
-      }
-    ]
-  }
+    {
+      "SearchProviderOverrides": [
+        {
+          "Name": "DuckDuckGo",
+          "Keyword": "ddg",
+          "SearchURL": "https://duckduckgo.com/?q={searchTerms}",
+          "IconURL": "https://duckduckgo.com/favicon.ico"
+        },
+        {
+          "Name": "ExampleSearch",
+          "Keyword": "ex",
+          "SearchURL": "https://example.com/search?q={searchTerms}",
+          "IconURL": "https://example.com/favicon.ico"
+        }
+      ]
+    }
   '';
 
   # List packages installed in system profile. To search, run:
@@ -170,8 +168,11 @@
     kdePackages.kcharselect # Tool to select and copy special characters from all installed fonts
     kdePackages.kcolorchooser # A small utility to select a color
     kdePackages.kolourpaint # Easy-to-use paint program
+    nixfmt-rfc-style # official nix formatting tool, needed vor vscodium
+    nixpkgs-fmt # needed for treefmt
+    treefmt # universal formatter
     vlc # Open source video player built with Qt/QML and libmpv
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim-full # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
   ];
 

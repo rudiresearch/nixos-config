@@ -1,13 +1,22 @@
 { config, pkgs, ... }:
-
 {
   xsession.windowManager.i3 = {
     enable = true;
 
     config = {
-      bars = [];
+      bars = [ ];
       modifier = "Mod4";
       focus.followMouse = false;
+      defaultWorkspace = "workspace number 10";
+
+      floating = {
+        criteria = [
+          {
+            instance = "copyq";
+          }
+        ];
+
+      };
 
       keybindings =
         let
@@ -15,9 +24,10 @@
           modifier = config.xsession.windowManager.i3.config.modifier;
         in
         {
-          "Print" = "exec ${pkgs.flameshot}/bin/flameshot gui --clipboard --path ~/";
+          "Print" = "exec ${pkgs.flameshot}/bin/flameshot gui --clipboard --path ~/Pictures/Screenshots";
           "Shift+Print" = "exec ${pkgs.flameshot}/bin/flameshot screen -p ~/Pictures/Screenshots/";
           "${modifier}+Shift+Print" = "exec ${pkgs.flameshot}/bin/flameshot gui --pin";
+          "${modifier}+Shift+v" = "exec --no-startup-id copyq show";
 
           "${modifier}+Return" = "exec ${cfg.config.terminal}";
           "${modifier}+q" = "kill";
@@ -96,9 +106,9 @@
           "${modifier}+a" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
         };
 
-#      startup = [
-#        { command = "xfce4-panel"; always = true; notification = false; }
-#      ];
+      #      startup = [
+      #        { command = "xfce4-panel"; always = true; notification = false; }
+      #      ];
 
       terminal = "alacritty";
       workspaceAutoBackAndForth = true;
