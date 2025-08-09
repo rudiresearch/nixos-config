@@ -17,12 +17,12 @@ in
 
   home.username = "rudi";
   home.homeDirectory = "/home/rudi";
-
+  home.file."Pictures/Screenshots/.keep".text = "";
   home.file.".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml".source = ./assets/xfce4-keyboard-shortcuts.xml;
+  home.file.".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml".source = ./assets/xfce4-panel.xml;
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    chromium
     xfce.xfce4-panel
 
     # shell customization
@@ -53,13 +53,21 @@ in
     python3Packages.requests
     python3Packages.beautifulsoup4
     python3Packages.selenium
-    chromedriver
 
     # Other tools
     btop  # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
   ];
+
+  programs.chromium = {
+    enable = true;
+  };
+
+  programs.starship = {
+    enable = true;
+    settings = builtins.fromTOML (builtins.readFile gruvboxRainbow);
+  };
 
   programs.vim = {
     enable = true;
@@ -69,12 +77,6 @@ in
       set softtabstop=2    " Insert 2 spaces when pressing Tab
       set expandtab        " Convert tabs to spaces
     '';
-  };
-
-  
-  programs.starship = {
-    enable = true;
-    settings = builtins.fromTOML (builtins.readFile gruvboxRainbow);
   };
 
 

@@ -99,15 +99,29 @@
     };
 
     chromium = {
-      enable = true; 
+      enable = true;
       extensions = [
-        # "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+        # privacy
         "edibdbjcniadpccecjdfdjjppcpchdlm" # I still don't care about cookies
         "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+
         "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
         "jinjaccalgkegednnccohejagnlnfdag" # Violentmonkey
+
+        # OSINT-related extensions
+        "mnakbpdnkedaegeiaoakkjafhoidklnf" # Vortimo
       ];
+      initialPrefs = {
+        "distribution" = {
+          "import_bookmarks" = false;
+          "import_bookmarks_from_file" = ./assets/bookmarks.html; 
+        }; 
+      };
+      extraOpts = {
+        "ShowHomeButton" = false;
+        "BookmarkBarEnabled" = true;
+      };
     };
 
     firefox.enable = true;
@@ -124,9 +138,6 @@
 
   # include flakes
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
-
-  # load xfce4-panel config
-  environment.etc."xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml".source =  ./assets/xfce4-panel.xml;
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [

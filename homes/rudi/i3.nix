@@ -16,6 +16,9 @@
         in
         {
           "Print" = "exec ${pkgs.flameshot}/bin/flameshot gui --clipboard --path ~/";
+          "Shift+Print" = "exec ${pkgs.flameshot}/bin/flameshot screen -p ~/Pictures/Screenshots/";
+          "${modifier}+Shift+Print" = "exec ${pkgs.flameshot}/bin/flameshot gui --pin";
+
           "${modifier}+Return" = "exec ${cfg.config.terminal}";
           "${modifier}+q" = "kill";
           "${modifier}+space" = "exec rofi -show combi -display-drun ''";
