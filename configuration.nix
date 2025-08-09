@@ -110,7 +110,11 @@
         "jinjaccalgkegednnccohejagnlnfdag" # Violentmonkey
 
         # OSINT-related extensions
+        "mmbhfeiddhndihdjeganjggkmjapkffm" # EXIF Viewer Pro
+        "haebnnbpedcbhciplfhjjkbafijpncjl" # TinEye Reverse Image Search
+        "bhchdcejhohfmigjafbampogmaanbfkg" # User-Agent Switcher and Manager
         "mnakbpdnkedaegeiaoakkjafhoidklnf" # Vortimo
+
       ];
       initialPrefs = {
         "distribution" = {
@@ -139,8 +143,29 @@
   # include flakes
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
+  # This snippet writes a policy file to configure search engines
+  environment.etc."opt/chrome/policies/managed/search_engines.json".text = ''
+  {
+    "SearchProviderOverrides": [
+      {
+        "Name": "DuckDuckGo",
+        "Keyword": "ddg",
+        "SearchURL": "https://duckduckgo.com/?q={searchTerms}",
+        "IconURL": "https://duckduckgo.com/favicon.ico"
+      },
+      {
+        "Name": "ExampleSearch",
+        "Keyword": "ex",
+        "SearchURL": "https://example.com/search?q={searchTerms}",
+        "IconURL": "https://example.com/favicon.ico"
+      }
+    ]
+  }
+  '';
+
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
+    copyq # clipboard manager
     kdePackages.kcalc # Calculator
     kdePackages.kcharselect # Tool to select and copy special characters from all installed fonts
     kdePackages.kcolorchooser # A small utility to select a color
@@ -151,7 +176,7 @@
   ];
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   system.stateVersion = "25.05"; # Did you read the comment?
 

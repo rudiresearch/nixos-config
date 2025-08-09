@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   gruvboxRainbow = pkgs.fetchurl {
@@ -40,13 +40,14 @@ in
     tcpdump
 
     # OSINT Tools
-    theharvester
-    holehe # check emails across various sites
     ghunt # check for gmail account
+    holehe # check emails across various sites
+    instaloader
+    metasploit
     recon-ng
     sherlock
-    metasploit
     subfinder
+    theharvester
     
     # web scraping & automation
     python3
@@ -79,6 +80,7 @@ in
     '';
   };
 
+  services.copyq.enable = true;
 
   services.flameshot = {
     enable = true;
@@ -101,7 +103,7 @@ in
       init.defaultBranch = "main";
     };
   };
-  
+
   # You can update home Manager without changing this value. See
   # the home Manager release notes for a list of state version
   # changes in each release.
