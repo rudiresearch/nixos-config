@@ -105,9 +105,6 @@ in
 
   services.ssh-agent = {
     enable = true;
-    keys = [
-      "home/rudi/.ssh/github_rudiresearch_id_ed25519"
-    ];
   };
 
   stylix.targets.starship.enable = false;
