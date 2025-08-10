@@ -10,6 +10,7 @@ in
 {
   imports = [
     ./gui
+    ./packages
     ./terminal
     ./i3.nix
     ./rofi.nix
@@ -23,7 +24,7 @@ in
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    #    xfce.xfce4-panel
+    xfce.xfce4-panel
 
     # shell customization
     starship

@@ -32,6 +32,8 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
+  security.rtkit.enable = true;
+
   # Enable the xfce and i3 
   services.xserver = {
     enable = true;
@@ -57,7 +59,7 @@
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
 
-  security.rtkit.enable = true;
+  services.resolved.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -173,6 +175,7 @@
     treefmt # universal formatter
     vlc # Open source video player built with Qt/QML and libmpv
     vim-full # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wireguard-tools
     wget
   ];
 
