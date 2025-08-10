@@ -66,6 +66,17 @@ in
     enable = true;
   };
 
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+    matchBlocks = {
+      "github.com" = {
+        user = "git";
+        identityFile = "~/.ssh/github_rudiresearch_id_ed25519";
+      };
+    };
+  };
+
   programs.starship = {
     enable = true;
     settings = builtins.fromTOML (builtins.readFile gruvboxRainbow);
@@ -90,6 +101,13 @@ in
         showStartupLaunchMessage = true;
       };
     };
+  };
+
+  services.ssh-agent = {
+    enable = true;
+    keys = [
+      "home/rudi/.ssh/github_rudiresearch_id_ed25519"
+    ];
   };
 
   stylix.targets.starship.enable = false;
