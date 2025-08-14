@@ -129,8 +129,6 @@
       };
     };
 
-    firefox.enable = true;
-
     vim = {
       defaultEditor = true;
       enable = true;
@@ -168,8 +166,9 @@
     copyq # clipboard manager
     kdePackages.kcalc # Calculator
     kdePackages.kcharselect # Tool to select and copy special characters from all installed fonts
-    kdePackages.kcolorchooser # A small utility to select a color
+    gpick # A small utility to select a color
     kdePackages.kolourpaint # Easy-to-use paint program
+    libreoffice-qt6-fresh
     nixfmt-rfc-style # official nix formatting tool, needed vor vscodium
     nixpkgs-fmt # needed for treefmt
     treefmt # universal formatter
@@ -177,6 +176,9 @@
     vim-full # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wireguard-tools
     wget
+    xfce.catfish
+    xfce.xfburn
+
   ];
 
   # Enable the OpenSSH daemon.

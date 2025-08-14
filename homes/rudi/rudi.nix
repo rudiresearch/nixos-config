@@ -13,6 +13,7 @@ in
     ./packages
     ./terminal
     ./i3.nix
+    ./osintstuff.nix
     ./rofi.nix
   ];
 
@@ -39,6 +40,9 @@ in
     whois
     dig
     tcpdump
+
+    # terminal tools
+    ffmpeg
 
     # OSINT Tools
     ghunt # check for gmail account
