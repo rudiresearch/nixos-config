@@ -72,7 +72,7 @@
   users.users.rudi = {
     isNormalUser = true;
     description = "rudi";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "vboxsf" "wheel" ];
     shell = pkgs.zsh;
   };
 
