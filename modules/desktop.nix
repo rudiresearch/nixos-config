@@ -7,7 +7,7 @@
 
     xserver.xkb = {
       layout = "us,de,ara";
-      options = "grp:ctrl_alt_toggle,caps:escape"; # Caps Lock → Escape
+      options = "grp:win_space_toggle,caps:escape"; # Caps Lock → Escape
     };
     displayManager.sddm.enable = true;
     desktopManager.plasma6.enable = true;

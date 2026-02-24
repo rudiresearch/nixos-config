@@ -39,7 +39,7 @@ in
       email = "rudi.research@proton.me";
     };
   };
-
+  
   # Let HM manage itself
   programs.home-manager.enable = true;
 

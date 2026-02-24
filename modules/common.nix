@@ -18,23 +18,28 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  environment.systemPackages = with pkgs; [
-    btop
-    ifuse
-    keepassxc
-    libguestfs
-    libimobiledevice # needed for iOS device connectivity 
-    qemu
-    spice-vdagent
-    usbutils
-    veracrypt
-    vim
-    virglrenderer
-    virtualbox
-    virt-manager
-    virt-viewer
-    wget
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      btop
+      ifuse
+      keepassxc
+      libguestfs
+      libimobiledevice # needed for iOS device connectivity 
+      qemu
+      spice-vdagent
+      usbutils
+      veracrypt
+      vim
+      virglrenderer
+      virtualbox
+      virt-manager
+      virt-viewer
+      wget
+    ];
+    variables = {
+      TERMINAL = "alacritty";
+    };
+  };
 
   networking.networkmanager.enable = true;
 
@@ -48,6 +53,7 @@
         };
       };
     };
+    ssh.startAgent = true;
   };
 
   security.rtkit.enable = true;
@@ -67,6 +73,7 @@
     usbmuxd.enable = true; # needed for iOS device connectivity
   };
 
+  users.extraGroups.vboxusers.members = [ "user" ];
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -75,7 +82,16 @@
         runAsRoot = false;
       };
     };
-    virtualbox.host.enable = true;
+    virtualbox = {
+      guest = {
+        enable = true;
+        dragAndDrop = false;
+      };
+      host = {
+        enable = true;
+        enableExtensionPack = true;
+      };
+    };
   };
 
 }
